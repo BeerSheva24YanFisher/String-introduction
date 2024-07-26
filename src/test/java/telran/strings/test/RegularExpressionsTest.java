@@ -13,11 +13,11 @@ public class RegularExpressionsTest {
     @Test
     public void testValidJavaVariableNames() {
         String isJavaVar = Strings.javaVariable();
-        List<String> validVar = Arrays.asList("varName", "var_1", "_varName", "varName123", "VarName");
+        List<String> validVar = Arrays.asList("varName", "var_1", "_varName", "varName123", "VarName", "___", "$f");
         boolean allMatch = validVar.stream().allMatch(name -> name.matches(isJavaVar));
         assertTrue(allMatch);
 
-        List<String> invalidVar = Arrays.asList("1varName", "var-Name", "var Name", "@varName");
+        List<String> invalidVar = Arrays.asList("1varName", "var-Name", "var Name", "@varName", "$$$$", "", "_");
         boolean noneMatch = invalidVar.stream().noneMatch(name -> name.matches(isJavaVar));
         assertTrue(noneMatch);
     }
