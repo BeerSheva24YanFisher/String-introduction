@@ -6,7 +6,7 @@ public class Strings {
     }
 
     public static String javaVariable(){
-        return "[a-zA-Z_][a-zA-Z0-9_]*";
+        return "[a-zA-Z_$][a-zA-Z0-9_$]*";
     }
 
 }
