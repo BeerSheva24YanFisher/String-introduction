@@ -83,7 +83,7 @@ public class Strings {
         String number = getNumberRegex();
         String spaceAndQuestion = "(\\s*\\(*)*";
         return String.format(
-            "^?%s?(%s|%s)\\s*\\)?(?:\\s*[*/+-]%s(%s|%s)\\s*(\\)*\\s*)*)*$",
+            "^?%s?(%s|%s)(\\s*\\)*)*?(?:\\s*[*/+-]%s(%s|%s)\\s*(\\)*\\s*)*)*$",
             spaceAndQuestion, javaVar, number,spaceAndQuestion, javaVar, number);
     }
 
