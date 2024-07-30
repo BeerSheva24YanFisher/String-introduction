@@ -88,7 +88,6 @@ public class Strings {
     }
 
     private static boolean containsKeywords(String expr) {
-        int a = ((4+2));
         String[] tokens = expr.split("[+\\-*/()\\s]");
         return Arrays.stream(tokens).anyMatch(Strings::isJavaKeyword);
     }

@@ -120,11 +120,12 @@ public class RegularExpressionsTest {
         assertFalse(Strings.isArithmeticExpression(""));
         assertFalse(Strings.isArithmeticExpression("   "));
         assertFalse(Strings.isArithmeticExpression("a + b - * c"));
-        assertFalse(Strings.isArithmeticExpression("a + (b - c * d"));
+        assertFalse(Strings.isArithmeticExpression("a + (  b - c * d"));
         assertFalse(Strings.isArithmeticExpression("a + b - (c * d) /"));
         assertFalse(Strings.isArithmeticExpression("for + 3"));
         assertFalse(Strings.isArithmeticExpression("1for + 3"));
         assertFalse(Strings.isArithmeticExpression("a b + 3"));
+        assertFalse(Strings.isArithmeticExpression("a (b)"));
 
 
     }
