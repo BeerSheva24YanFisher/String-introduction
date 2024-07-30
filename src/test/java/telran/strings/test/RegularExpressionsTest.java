@@ -98,7 +98,7 @@ public class RegularExpressionsTest {
         assertTrue(Strings.isArithmeticExpression("a - 7 / (b + 1)"));
         assertTrue(Strings.isArithmeticExpression("x"));
         assertTrue(Strings.isArithmeticExpression("(a + b) * c"));
-        assertTrue(Strings.isArithmeticExpression("a + (b * c) - ( ( (   d) / e ) )"));
+        assertTrue(Strings.isArithmeticExpression("(  a + (b * c )  ) - ( ( (   d) / e ) )"));
         assertTrue(Strings.isArithmeticExpression("42 + a"));
         assertTrue(Strings.isArithmeticExpression("123.6"));
         assertTrue(Strings.isArithmeticExpression("aA1 + b__f - c * d / e"));
