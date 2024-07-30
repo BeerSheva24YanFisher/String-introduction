@@ -84,7 +84,7 @@ public class Strings {
         String spaceAndBracketBegin = "(\\s*\\(*)*";
         String spaceAndBracketEnd = "(\\s*\\)*)*";
         return String.format(
-            "^?%s?(%s|%s)%s?([*/+-]%s(%s|%s)%s)*$",
+            "%s(%s|%s)%s([*/+-]%s(%s|%s)%s)*",
             spaceAndBracketBegin, javaVar, number,spaceAndBracketEnd,spaceAndBracketBegin, javaVar, number, spaceAndBracketEnd);
     }
 
