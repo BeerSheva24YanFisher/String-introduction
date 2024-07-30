@@ -81,9 +81,10 @@ public class Strings {
     private static String getArithmeticExpressionRegex() {
         String javaVar = javaVariable();
         String number = getNumberRegex();
-        String spaceAndQuestion = "?(\\s*\\(*)*";
-        return String.format("^%s?(%s|%s)\\s*\\)?(?:\\s*[+\\-*/]\\s*\\(?(%s|%s)\\s*?(\\)*\\s*)*?)*\\s*$",
-        spaceAndQuestion, javaVar, number, javaVar, number);
+        String spaceAndQuestion = "(\\s*\\(*)*";
+        return String.format(
+            "^?%s?(%s|%s)\\s*\\)?(?:\\s*[*/+-]%s(%s|%s)\\s*(\\)*\\s*)*)*$",
+            spaceAndQuestion, javaVar, number,spaceAndQuestion, javaVar, number);
     }
 
     private static boolean containsKeywords(String expr) {
