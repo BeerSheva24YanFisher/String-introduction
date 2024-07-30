@@ -56,7 +56,7 @@ public class Strings {
     
     
     public static boolean isArithmeticExpression(String expr) {
-        expr = expr.replaceAll("\\s+", "");
+        expr = expr.trim();
         return areBracketsBalanced(expr) && !containsKeywords(expr) && expr.matches(getArithmeticExpressionRegex());    
     }
 
@@ -81,11 +81,14 @@ public class Strings {
     private static String getArithmeticExpressionRegex() {
         String javaVar = javaVariable();
         String number = getNumberRegex();
-        return String.format("^\\(?(%s|%s)(?:[+\\-*/]\\(?(%s|%s)\\)?)*\\)?$", javaVar, number, javaVar,number);
+        String spaceAndQuestion = "?(\\s*\\(*)*";
+        return String.format("^%s?(%s|%s)\\s*\\)?(?:\\s*[+\\-*/]\\s*\\(?(%s|%s)\\s*?(\\)*\\s*)*?)*\\s*$",
+        spaceAndQuestion, javaVar, number, javaVar, number);
     }
 
     private static boolean containsKeywords(String expr) {
-        String[] tokens = expr.split("[+\\-*/()]");
+        int a = ((4+2));
+        String[] tokens = expr.split("[+\\-*/()\\s]");
         return Arrays.stream(tokens).anyMatch(Strings::isJavaKeyword);
     }
 
