@@ -80,12 +80,10 @@ public class Strings {
     private static String getArithmeticExpressionRegex() {
         String javaVar = javaVariable();
         String number = getNumberRegex();
-        String operand = "("+javaVar + "|" + number + ")";
         String spacesBrackets = "((\\s*\\(*)*|(\\s*\\)*)*)";
+        String operand = spacesBrackets+"("+javaVar + "|" + number + ")"+spacesBrackets;
         String operator = "[*/+-]";
-        return String.format(
-            "%s(%s%s)*",
-            spacesBrackets+operand+spacesBrackets, operator, spacesBrackets+operand+spacesBrackets);
+        return String.format("%s(%s%s)*",operand, operator, operand);
     }
 
     private static boolean containsKeywords(String expr) {
