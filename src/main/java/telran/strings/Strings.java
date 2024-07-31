@@ -81,7 +81,7 @@ public class Strings {
         String javaVar = javaVariable();
         String number = getNumberRegex();
         String operand = "("+javaVar + "|" + number + ")";
-        String spacesBrackets = "(\\s*(\\(*|\\)*))*";
+        String spacesBrackets = "((\\s*\\(*)*|(\\s*\\)*)*)";
         String operator = "[*/+-]";
         return String.format(
             "%s(%s%s)*",
