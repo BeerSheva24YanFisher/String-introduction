@@ -105,6 +105,7 @@ public class RegularExpressionsTest {
         assertTrue(Strings.isArithmeticExpression("for1 + 3"));
         assertTrue(Strings.isArithmeticExpression("  (    (   (   ( ( a )  +  b )  /  2  ) + (10)   )    )  "));
         assertTrue(Strings.isArithmeticExpression("   (    fo  +  r  )   "));
+        assertTrue(Strings.isArithmeticExpression("((  ((  a))  ) )"));
 
 
         assertFalse(Strings.isArithmeticExpression("a +"));
@@ -126,6 +127,7 @@ public class RegularExpressionsTest {
         assertFalse(Strings.isArithmeticExpression("1for + 3"));
         assertFalse(Strings.isArithmeticExpression("a b + 3"));
         assertFalse(Strings.isArithmeticExpression("a (b)"));
+        assertFalse(Strings.isArithmeticExpression("a -(b)4"));
 
 
     }
