@@ -87,7 +87,8 @@ public class Strings {
     }
 
     private static boolean containsKeywords(String expr) {
-        String[] tokens = expr.split("[-+*/()\\s]");
+        String operatorSpacesBrackets = "[*/+-]|\\(|\\)|\\s+";
+        String[] tokens = expr.split(operatorSpacesBrackets);
         return Arrays.stream(tokens).anyMatch(Strings::isJavaKeyword);
     }
 
