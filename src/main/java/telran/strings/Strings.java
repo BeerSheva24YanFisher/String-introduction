@@ -73,16 +73,20 @@ public class Strings {
         return counter == 0;
     }
 
-    private static String getNumberRegex() {
-        return "(\\d+(\\.\\d+)?)";
+    private static String getOperator() {
+        return "[*/+-]";
     }
 
-    private static String getArithmeticExpressionRegex() {
+    private static String getOperand() {
         String javaVar = javaVariable();
-        String number = getNumberRegex();
+        String number = "(\\d+(\\.\\d+)?)";
         String spacesBrackets = "((\\s*\\(*)*|(\\s*\\)*)*)";
-        String operand = spacesBrackets+"("+javaVar + "|" + number + ")"+spacesBrackets;
-        String operator = "[*/+-]";
+        return spacesBrackets+"("+javaVar + "|" + number + ")"+spacesBrackets;
+    }
+    
+    private static String getArithmeticExpressionRegex() {
+        String operand = getOperand();
+        String operator = getOperator();
         return String.format("%s(%s%s)*",operand, operator, operand);
     }
 
