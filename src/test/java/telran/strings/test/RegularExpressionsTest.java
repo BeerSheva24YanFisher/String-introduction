@@ -128,6 +128,7 @@ public class RegularExpressionsTest {
         assertFalse(Strings.isArithmeticExpression("a b + 3"));
         assertFalse(Strings.isArithmeticExpression("a (b)"));
         assertFalse(Strings.isArithmeticExpression("a -(b)4"));
+        assertFalse(Strings.isArithmeticExpression("abstract + 3"));
 
 
     }

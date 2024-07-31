@@ -49,7 +49,7 @@ public class Strings {
     }
 
     private static boolean isJavaKeyword(String name) {
-        return Arrays.binarySearch(javaKeywords, name)>0;
+        return Arrays.binarySearch(javaKeywords, name)>=0;
     }
 
     
@@ -80,16 +80,16 @@ public class Strings {
     private static String getArithmeticExpressionRegex() {
         String javaVar = javaVariable();
         String number = getNumberRegex();
-        String spaceAndBracketBegin = "(\\s*\\(*)*";
-        String spaceAndBracketEnd = "(\\s*\\)*)*";
+        String operand = "("+javaVar + "|" + number + ")";
+        String spacesBrackets = "(\\s*(\\(*|\\)*))*";
         String operator = "[*/+-]";
         return String.format(
-            "%s(%s|%s)%s(%s%s(%s|%s)%s)*",
-            spaceAndBracketBegin, javaVar, number,spaceAndBracketEnd,operator,spaceAndBracketBegin, javaVar, number, spaceAndBracketEnd);
+            "%s(%s%s)*",
+            spacesBrackets+operand+spacesBrackets, operator, spacesBrackets+operand+spacesBrackets);
     }
 
     private static boolean containsKeywords(String expr) {
-        String[] tokens = expr.split("[+\\-*/()\\s]");
+        String[] tokens = expr.split("[-+*/()\\s]");
         return Arrays.stream(tokens).anyMatch(Strings::isJavaKeyword);
     }
 
