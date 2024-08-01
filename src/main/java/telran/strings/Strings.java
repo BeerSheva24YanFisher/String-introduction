@@ -1,17 +1,16 @@
 package telran.strings;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.lang.model.SourceVersion;
 
 public class Strings {
-    public static String[] javaKeywords = {
-        "abstract", "assert", "boolean", "break", "byte", "case", "catch", "char",
-        "class", "const", "continue", "default", "do", "double", "else", "enum",
-        "extends", "final", "finally", "float", "for", "goto", "if", "implements",
-        "import", "instanceof", "int", "interface", "long", "native", "new", "null",
-        "package", "private", "protected", "public", "return", "short", "static", "strictfp",
-        "super", "switch", "synchronized", "this", "throw", "throws", "transient", "try",
-        "void", "volatile", "while"
-    };
+    static Pattern pattern;
+    static {
+        pattern = Pattern.compile(getArithmeticExpressionRegex());
+    }
 
     public static String firstName() {
         return "[A-Z][a-z]{4,}";
@@ -49,14 +48,18 @@ public class Strings {
     }
 
     private static boolean isJavaKeyword(String name) {
-        return Arrays.binarySearch(javaKeywords, name)>=0;
+        return SourceVersion.isKeyword(name);
     }
 
     
     
     
     public static boolean isArithmeticExpression(String expr) {
-        return areBracketsBalanced(expr) && !containsKeywords(expr) && expr.matches(getArithmeticExpressionRegex());    
+        Matcher matcher = pattern.matcher(expr);
+        boolean exprMatch = matcher.matches(); //expr.matches(getArithmeticExpressionRegex())
+        boolean pairness = areBracketsBalanced(expr); //areBracketsBalanced(expr)
+        boolean javaNames = !containsKeywords(expr); //!containsKeywords(expr)
+        return  exprMatch && pairness && javaNames; 
     }
 
     private static boolean areBracketsBalanced(String expr) {
@@ -81,7 +84,7 @@ public class Strings {
         String javaVar = javaVariable();
         String number = "(\\d+(\\.\\d+)?)";
         String spacesBrackets = "([\\s(]*|[\\s)]*)";
-        return spacesBrackets+"("+javaVar + "|" + number + ")"+spacesBrackets;
+        return String.format("%s(%s|%s)%s", spacesBrackets,javaVar,number,spacesBrackets);
     }
     
     private static String getArithmeticExpressionRegex() {
@@ -91,10 +94,14 @@ public class Strings {
     }
 
     private static boolean containsKeywords(String expr) {
-        String operatorSpacesBrackets = "[*/+-]|\\(|\\)|\\s+";
-        String[] tokens = expr.split(operatorSpacesBrackets);
+        String[] tokens = expr.split(operatorSpacesBrackets());
         return Arrays.stream(tokens).anyMatch(Strings::isJavaKeyword);
     }
+
+    private static String operatorSpacesBrackets(){
+        return String.format("%s|[\\s()]+", getOperator());
+    }
+
 
 
 
