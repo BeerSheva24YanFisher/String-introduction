@@ -80,7 +80,7 @@ public class Strings {
     private static String getOperand() {
         String javaVar = javaVariable();
         String number = "(\\d+(\\.\\d+)?)";
-        String spacesBrackets = "([\\s\\(]*|[\\s\\)]*)";
+        String spacesBrackets = "([\\s(]*|[\\s)]*)";
         return spacesBrackets+"("+javaVar + "|" + number + ")"+spacesBrackets;
     }
     
